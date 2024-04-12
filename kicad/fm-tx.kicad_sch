@@ -2741,13 +2741,13 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 69.85) (xy 26.035 69.85)
+			(xy 27.94 67.31) (xy 27.94 36.195)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "130fe2d9-5049-49b5-afb4-beb3d307d5ef")
+		(uuid "12ea966a-17d8-4152-884f-4e0b25ab5641")
 	)
 	(bus
 		(pts
@@ -2901,16 +2901,6 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 67.31) (xy 27.94 67.31)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3346f9c7-768b-42f6-a924-2e144baa3d9e")
-	)
-	(wire
-		(pts
 			(xy 120.65 132.715) (xy 120.65 133.985)
 		)
 		(stroke
@@ -2941,7 +2931,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.725 53.34) (xy 85.725 34.29)
+			(xy 85.725 53.34) (xy 85.725 31.75)
 		)
 		(stroke
 			(width 0)
@@ -3101,7 +3091,7 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 38.1) (xy 87.63 51.435)
+			(xy 87.63 34.29) (xy 87.63 51.435)
 		)
 		(stroke
 			(width 0)
@@ -3231,6 +3221,16 @@
 	)
 	(wire
 		(pts
+			(xy 25.4 69.85) (xy 38.1 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79485c14-a8f2-46e4-9a97-4c6881def50a")
+	)
+	(wire
+		(pts
 			(xy 127 78.105) (xy 127 80.01)
 		)
 		(stroke
@@ -3251,7 +3251,7 @@
 	)
 	(wire
 		(pts
-			(xy 24.13 77.47) (xy 24.13 34.29)
+			(xy 22.86 77.47) (xy 22.86 31.75)
 		)
 		(stroke
 			(width 0)
@@ -3331,7 +3331,7 @@
 	)
 	(wire
 		(pts
-			(xy 26.035 36.195) (xy 89.535 36.195)
+			(xy 27.94 36.195) (xy 89.535 36.195)
 		)
 		(stroke
 			(width 0)
@@ -3441,16 +3441,6 @@
 	)
 	(wire
 		(pts
-			(xy 26.035 69.85) (xy 26.035 36.195)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9b7633bd-54dd-4cda-9043-42945dfdffd5")
-	)
-	(wire
-		(pts
 			(xy 240.665 43.815) (xy 240.665 52.07)
 		)
 		(stroke
@@ -3549,6 +3539,16 @@
 		)
 		(uuid "aef81776-9947-42c9-89d7-c98f71a2daf2")
 	)
+	(wire
+		(pts
+			(xy 27.94 67.31) (xy 38.1 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af40a05a-3a95-464c-ab68-f2f2f9d73334")
+	)
 	(bus
 		(pts
 			(xy 250.825 96.52) (xy 250.825 57.15)
@@ -3561,7 +3561,7 @@
 	)
 	(wire
 		(pts
-			(xy 24.13 34.29) (xy 85.725 34.29)
+			(xy 22.86 31.75) (xy 85.725 31.75)
 		)
 		(stroke
 			(width 0)
@@ -3701,7 +3701,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 38.1) (xy 87.63 38.1)
+			(xy 25.4 34.29) (xy 87.63 34.29)
 		)
 		(stroke
 			(width 0)
@@ -3781,7 +3781,7 @@
 	)
 	(wire
 		(pts
-			(xy 24.13 77.47) (xy 38.1 77.47)
+			(xy 22.86 77.47) (xy 38.1 77.47)
 		)
 		(stroke
 			(width 0)
@@ -3811,7 +3811,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 67.31) (xy 27.94 38.1)
+			(xy 25.4 34.29) (xy 25.4 69.85)
 		)
 		(stroke
 			(width 0)

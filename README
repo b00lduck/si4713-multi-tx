@@ -30,4 +30,5 @@ The rotary encoder is connected to the ESP32 via three GPIO pins, two for the en
 The software is written in C++ using the Arduino framework and PlatformIO.
 
 
+![Schematic](kicad/schematic.png)
 
