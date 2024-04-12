@@ -2,6 +2,8 @@
 
 This project is a FM modulator with 4 channels, consisting of four si4713 FM transmitters controlled by an ESP32.
 
+The setup is used in an installation where four audio sources are modulated to FM and injected into a FM distribution system. The four outputs are connected to a 4-channel RF combiner, which is then connected to an antenna amplifier along with other RF sources i.e. aerials.
+
 Programming is done with one rotary encoder and four OLED displays.
 
 For a detailed schematic see the kicad project in the `kicad` folder.
