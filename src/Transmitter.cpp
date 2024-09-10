@@ -25,8 +25,13 @@ void Transmitter::configure(ChannelState* state) {
     Serial.printf("freq: %d, txPower: %d, ps: %s\n", state->freq, state->txPower, state->ps);
 
     radio.tuneFM(state->freq);
-    radio.setTXpower(state->txPower,100);
-
+    radio.setTXpower(state->txPower,0);
+    radio.setProperty(SI4713_PROP_TX_PREEMPHASIS, 0x0001); // 50us pre-emphasis
+    radio.setProperty(SI4713_PROP_TX_ACOMP_THRESHOLD, 0xffd8); // -40dBFS
+    radio.setProperty(SI4713_PROP_TX_ACOMP_GAIN, 0x000f); // 15dB
+    radio.setProperty(SI4713_PROP_TX_LIMITER_RELEASE_TIME, 0x000D); // 39.38ms
+    radio.setProperty(SI4713_PROP_TX_ACOMP_ENABLE, 0x0003); // enable limiter and compressor
+    
     radio.beginRDS();
     radio.setRDSstation(state->ps);
     radio.setRDSbuffer("");
@@ -51,4 +56,12 @@ void Transmitter::readStatus() {
 int8_t Transmitter::getLevel() {
     radio.readASQ();
     return radio.currInLevel;
+}
+
+bool Transmitter::getTxStatus() {
+    radio.readTuneStatus();
+
+    Serial.printf("AntCap: %d\n", radio.currAntCap);
+    Serial.printf("dBuV: %d\n", radio.currdBuV);
+    return true;
 }

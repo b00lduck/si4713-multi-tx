@@ -34,6 +34,30 @@ uint8_t uiMode = 0;
 uint8_t selectedChannel = 0;
 uint8_t selectedDigit = 0;
 
+
+uint32_t screenSaverTimer = millis();
+bool screenSaver = false;
+
+void enableScreenSaver() {
+  for (int i = 0; i < NUM_TX; i++) {
+    display[i].screenSaver = true;
+    screenSaver = true;
+    uiMode = 0;
+  }
+}
+
+void disableScreenSaver() {
+  screenSaverTimer = millis();
+  for (int i = 0; i < NUM_TX; i++) {
+    display[i].screenSaver = false;
+    screenSaver = false;
+  }
+}
+
+void resetScreenSaver() {
+  screenSaverTimer = millis();
+}
+
 void setup() {
 
   Serial.begin(9600);
@@ -52,10 +76,18 @@ void setup() {
 
   Serial.print("\ninitializing transmitters... ");
   for (int i = 0; i < NUM_TX; i++) {
-    Serial.printf("#%d ", i);
     tx[i].init();
     tx[i].configure(&state.channelState[i]);
+    tx[i].readStatus();  
   }
+  sleep(5);
+  for (int i = 0; i < NUM_TX; i++) {
+    tx[i].configure(&state.channelState[i]);
+    display[i].show(&state.channelState[i], tx[i].getLevel());
+    tx[i].readStatus();  
+    sleep(2);  
+  }
+
   
   Serial.println("\ninitializing rotary encoder...");
   rotaryEncoder.begin();
@@ -63,68 +95,89 @@ void setup() {
   rotaryEncoder.setup(readEncoderISR);
 
   Serial.println("initializing done.");
+
+  resetScreenSaver();
 }
+
+
 
 void loop() {
 
+  uint32_t inactivity = millis() - screenSaverTimer;
+  if (inactivity > 10000) {
+    enableScreenSaver();
+  }
+
   if (rotaryEncoder.encoderChanged()) {
-    switch(uiMode) {
-      case 0:
-        break;
-      case 1:
-        break;
-      case 2:
-        Serial.printf("Selected value %d\n", rotaryEncoder.readEncoder());
-        state.channelState[selectedChannel].freq = rotaryEncoder.readEncoder() * FREQENC_DIVISOR;
-        tx[selectedChannel].configure(&state.channelState[selectedChannel]);
-        break;
-      case 3:
-        Serial.printf("Selected value %d\n", rotaryEncoder.readEncoder());
-        state.channelState[selectedChannel].ps[selectedDigit] = rotaryEncoder.readEncoder();
-        tx[selectedChannel].configure(&state.channelState[selectedChannel]);
-        break;
+    Serial.printf("Selected channel: %d, Encoder value %d\n", selectedChannel, rotaryEncoder.readEncoder());
+    if (screenSaver) {
+      disableScreenSaver();
+    } else {
+      resetScreenSaver();
+      switch(uiMode) {
+        case 0:
+          break;
+        case 1:
+          break;
+        case 2:
+          Serial.printf("Selected value %d\n", rotaryEncoder.readEncoder());
+          state.channelState[selectedChannel].freq = rotaryEncoder.readEncoder() * FREQENC_DIVISOR;
+          Serial.printf("New freq: %d\n", state.channelState[selectedChannel].freq);
+          tx[selectedChannel].configure(&state.channelState[selectedChannel]);
+          break;
+        case 3:
+          Serial.printf("Selected value %d\n", rotaryEncoder.readEncoder());
+          state.channelState[selectedChannel].ps[selectedDigit] = rotaryEncoder.readEncoder();
+          tx[selectedChannel].configure(&state.channelState[selectedChannel]);
+          break;
+      }
     }
   }
 
   if (rotaryEncoder.isEncoderButtonClicked()) {
-    switch(uiMode) {
-      case 0:
-        Serial.println("UI mode 1");
-        uiMode = 1;
-        rotaryEncoder.setAcceleration(0);
-        rotaryEncoder.setBoundaries(0, NUM_TX-1, false);
-        rotaryEncoder.setEncoderValue(0);
-        break;
-      case 1:
-        selectedChannel = rotaryEncoder.readEncoder();
-        Serial.println("UI mode 2");
-        uiMode = 2;
-        rotaryEncoder.setAcceleration(250);
-        rotaryEncoder.setBoundaries(FREQENC_BOUND_LOW,FREQENC_BOUND_HIGH,false);
-        rotaryEncoder.setEncoderValue(state.channelState[selectedChannel].freq / FREQENC_DIVISOR);
-        break;
-      case 2:
-        Serial.println("UI mode 3");
-        uiMode = 3;
-        selectedDigit = 0;
-        Serial.printf("Selected digit %d\n", selectedDigit);
-        rotaryEncoder.setAcceleration(50);
-        rotaryEncoder.setBoundaries(32,90,false);
-        rotaryEncoder.setEncoderValue(state.channelState[selectedChannel].ps[selectedDigit]);
-        break;
-      case 3:
-        if (selectedDigit == 7) {
-          state.channelState[selectedChannel].save();
-          tx[selectedChannel].configure(&state.channelState[selectedChannel]);
-          uiMode = 0;
-          display[selectedChannel].invertPiDigit(0);
-        } else {
-          selectedDigit++;
+    if (screenSaver) {
+      disableScreenSaver();
+    } else {
+      resetScreenSaver();
+      switch(uiMode) {
+        case 0:
+          Serial.println("UI mode 1 - Channel selection");
+          uiMode = 1;
+          rotaryEncoder.setAcceleration(0);
+          rotaryEncoder.setBoundaries(0, NUM_TX-1, false);
+          rotaryEncoder.setEncoderValue(0);
+          break;
+        case 1:
+          selectedChannel = rotaryEncoder.readEncoder();
+          Serial.println("UI mode 2 - Frequency selection");
+          uiMode = 2;
+          rotaryEncoder.setAcceleration(250);
+          rotaryEncoder.setBoundaries(FREQENC_BOUND_LOW,FREQENC_BOUND_HIGH,false);
+          rotaryEncoder.setEncoderValue(state.channelState[selectedChannel].freq / FREQENC_DIVISOR);
+          break;
+        case 2:
+          Serial.println("UI mode 3 - Name selection");
+          uiMode = 3;
+          selectedDigit = 0;
           Serial.printf("Selected digit %d\n", selectedDigit);
+          rotaryEncoder.setAcceleration(50);
+          rotaryEncoder.setBoundaries(32,90,false);
           rotaryEncoder.setEncoderValue(state.channelState[selectedChannel].ps[selectedDigit]);
-        }
-        break;
-    }    
+          break;
+        case 3:
+          if (selectedDigit == 7) {
+            state.channelState[selectedChannel].save();
+            tx[selectedChannel].configure(&state.channelState[selectedChannel]);
+            uiMode = 0;
+            display[selectedChannel].invertPiDigit(0);
+          } else {
+            selectedDigit++;
+            Serial.printf("Selected digit %d\n", selectedDigit);
+            rotaryEncoder.setEncoderValue(state.channelState[selectedChannel].ps[selectedDigit]);
+          }
+          break;
+      }    
+    }
   }
 
   for (int i = 0; i < NUM_TX; i++) {

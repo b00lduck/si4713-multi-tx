@@ -11,7 +11,8 @@ class Transmitter {
         Transmitter(TwoWire* wire, uint8_t addr, uint8_t resetPin);
         void init();
         void readStatus();
-
+        bool getTxStatus();
+        
         int8_t getLevel();
 
         void configure(ChannelState* state);
