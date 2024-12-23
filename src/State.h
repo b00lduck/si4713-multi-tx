@@ -17,6 +17,9 @@ class ChannelState {
         // dBuV, 88-115 max (120 uncalibrated)
         uint8_t txPower;
 
+        // enable TX
+        bool enabled;
+
     private:
         uint8_t id;
 };
@@ -25,9 +28,9 @@ class State {
 
     public:
         State();
-        void load();
-        void save();
+        void load(uint8_t numtx);
+        void save(uint8_t numtx);
 
-        ChannelState channelState[NUM_TX];
+        ChannelState channelState[MAX_NUM_TX];
 
 };

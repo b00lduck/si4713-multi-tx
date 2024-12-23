@@ -15,6 +15,7 @@ void ChannelState::load(uint8_t _id) {
     freq = preferences.getUInt("freq", DEFAULT_FREQ);
     txPower = TXPOWER;
     preferences.getBytes("ps", ps, 9);
+    preferences.getBool("enabled", enabled);
     preferences.end();
 }
 
@@ -26,20 +27,21 @@ void ChannelState::save() {
     preferences.putUInt("freq", freq);
     preferences.putUInt("txPower", txPower);
     preferences.putBytes("ps", ps, 9);
+    preferences.putBool("enabled", enabled);
     preferences.end();
     Serial.printf("Saved settings for tx%d\n", id);
 }
 
 State::State() {}  
 
-void State::load() {
-    for (int i = 0; i < NUM_TX; i++) {
+void State::load(uint8_t numtx) {
+    for (int i = 0; i < numtx; i++) {
         channelState[i].load(i);
     }
 }
 
-void State::save() {
-    for (int i = 0; i < NUM_TX; i++) {
+void State::save(uint8_t numtx) {
+    for (int i = 0; i < numtx; i++) {
         channelState[i].save();
     }
 }

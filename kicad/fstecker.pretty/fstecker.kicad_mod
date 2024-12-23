@@ -1,0 +1,154 @@
+(footprint "fstecker"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(descr "https://www.we-online.de/katalog/datasheet/60312002114503.pdf")
+	(tags "SMA THT Female Jack Vertical ExtendedLegs")
+	(property "Reference" "J1"
+		(at 0 -4.75 0)
+		(layer "F.SilkS")
+		(uuid "2e85f35f-0e56-4d50-b79e-fb00619088bc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Conn_Coaxial"
+		(at -0.05 7.15 0)
+		(layer "F.Fab")
+		(uuid "bb31b51d-9c27-41e7-a00b-215c6423b425")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" "Connector_Coaxial:SMA_Wurth_60312002114503_Vertical"
+		(at -0.1 10.7 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c14e8660-10fc-4f42-921a-315f7fec09c5")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "59904b84-1fa5-4f86-909d-8c3e35b3e726")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, LEMO, ...)"
+		(at 0.3 8.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a1bc6a6b-d59e-4811-ae53-326ccd030ab0")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_rect
+		(start -4.75 -4.75)
+		(end 4.75 4.75)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "10c21444-ea7b-4f24-b118-fa951437d93b")
+	)
+	(fp_circle
+		(center 0.031118 0)
+		(end 4.831118 3.2)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "04db9ba5-9971-4e51-9e30-8846552ecd6d")
+	)
+	(fp_circle
+		(center 0.06741 0)
+		(end 3.76741 3.7)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "03ea192d-d898-4d0a-bcb2-3a9d4eb44082")
+	)
+	(pad "1" thru_hole circle
+		(at 0 0)
+		(size 3 3)
+		(drill 1.5)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "3d7b62e7-e4ae-49a4-aada-3c70f781c1dc")
+	)
+	(pad "2" thru_hole rect
+		(at -4.1 -4.1)
+		(size 3 3)
+		(drill 2.2)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "fcdf855a-404c-413e-8811-8092cd51f8aa")
+	)
+	(pad "2" thru_hole rect
+		(at -4.1 4)
+		(size 3 3)
+		(drill 2.2)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "123517c3-56e7-4b55-9125-7fe3b2ed0523")
+	)
+	(pad "2" thru_hole rect
+		(at 4.1 -4.1)
+		(size 3 3)
+		(drill 2.2)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "da4cb348-9dae-47af-861c-130879c12893")
+	)
+	(pad "2" thru_hole rect
+		(at 4.1 4)
+		(size 3 3)
+		(drill 2.2)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "a7613ed5-ba86-49ca-a57f-cd94714a1f9f")
+	)
+	(model "${KICAD8_3DMODEL_DIR}/Connector_Coaxial.3dshapes/SMA_Wurth_60312002114503_Vertical.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

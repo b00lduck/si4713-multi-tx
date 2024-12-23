@@ -3,4 +3,5 @@
   (lib (name "si4713")(type "KiCad")(uri "${KIPRJMOD}/si4713.kicad_sym")(options "")(descr ""))
   (lib (name "rotary")(type "KiCad")(uri "${KIPRJMOD}/rotary.kicad_sym")(options "")(descr ""))
   (lib (name "oled")(type "KiCad")(uri "${KIPRJMOD}/oled.kicad_sym")(options "")(descr ""))
+  (lib (name "levelshifter")(type "KiCad")(uri "${KIPRJMOD}/levelshifter.kicad_sym")(options "")(descr ""))
 )
